@@ -7,8 +7,8 @@ import ItemHeldsDialog from '../components/ItemHeldsDialog.vue'
 import {usePokemonAPIStore} from '../stores/pokemonAPI'
 
 const pokemonStore = usePokemonAPIStore()
+const pokemonkeyword = ref('raikou')
 const page = ref(0)
-const url = ref('')
 const urlLocation = ref('')
 const name = ref('')
 const height = ref(0)
@@ -79,7 +79,7 @@ const nextprevpage = (mode) => {
 
 const submitPokemon = async () => {
   isShow.value = true
-  pokemonStore.changeURl(url.value)
+  pokemonStore.changeURl(pokemonkeyword.value)
   await executeAxios()
   isShow.value = false
 }
@@ -219,8 +219,8 @@ const itemHeldModal = async (url) => {
 }
 
 onMounted(() => {
+  pokemonStore.changeURl(pokemonkeyword.value)
   executeAxios()
-  url.value = pokemonStore.url
 })
 
 //import axios from 'axios';
@@ -235,11 +235,12 @@ onMounted(() => {
       <h5 class="card-title">Pokemon Finding</h5>
       <h6 class="card-subtitle mb-2 text-muted">Please Input Pokemon Name Or ID Pokemon</h6>
       <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon2">{{ pokemonStore.baseurl }}</span>
         <input
           type="text"
           class="form-control"
           placeholder="Recipient's username"
-          v-model="url"
+          v-model="pokemonkeyword"
           aria-describedby="button-addon2"
         />
         <button

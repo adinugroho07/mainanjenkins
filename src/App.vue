@@ -26,6 +26,7 @@ const hitme = async () => {
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/pokemon">Pokemon</RouterLink>
+        <RouterLink to="/kalkulator">Kalkulator</RouterLink>
       </nav>
       <div>
         <button class="btn btn-primary " @click="counter.increment">Increment</button>
