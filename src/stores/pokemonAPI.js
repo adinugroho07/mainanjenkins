@@ -4,18 +4,19 @@ import { defineStore } from "pinia"
 import axios  from 'axios'
 
 export const usePokemonAPIStore = defineStore('pokemonapi',() => {
-    const url = ref('https://pokeapi.co/api/v2/pokemon/raikou')
+    const baseurl = ref('https://pokeapi.co/api/v2/pokemon/')
     const dataTemporary= ref({})
+    const fixUrl = ref('')
 
     const changeURl = (payload) => {
-        url.value = payload
+        fixUrl.value = baseurl.value + payload
     }
 
     const getDataAPI = async() => {
         dataTemporary.value = {}
         dataTemporary.value.images = []
         try {
-            const response = await axios.get(url.value)
+            const response = await axios.get(fixUrl.value)
         
             //dataTemporary.value = response.data 
             dataTemporary.value.name = response.data.name
@@ -42,6 +43,6 @@ export const usePokemonAPIStore = defineStore('pokemonapi',() => {
         
     }
 
-    return {url,dataTemporary,getDataAPI,changeURl}
+    return {baseurl,fixUrl,dataTemporary,getDataAPI,changeURl}
 })
 
